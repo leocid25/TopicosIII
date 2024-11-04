@@ -23,18 +23,26 @@ namespace ClinicaVeterinaria.Controllers
                 .Select(t => new { Id = (int)t, Nome = t.ToString() }), "Id", "Nome");
 
             // Define o role do usuário para a view
-            if (User.IsInRole("Proprietario"))
-            {
-                ViewBag.UserRole = "Proprietario";
-            }
-            else if (User.IsInRole("Curioso"))
-            {
-                ViewBag.UserRole = "Curioso";
-            }
-            else
-            {
-                ViewBag.UserRole = "";
-            }
+             if (User.IsInRole("Proprietario"))
+             {
+                 ViewBag.UserRole = "Proprietario";
+             }
+             else if (User.IsInRole("Curioso"))
+             {
+                 ViewBag.UserRole = "Curioso";
+             }
+             else if (User.IsInRole("Veterinario"))
+             {
+                 ViewBag.UserRole = "Veterinario";
+             } 
+             else if (User.IsInRole("Secretario"))
+             {
+                 ViewBag.UserRole = "Secretario";
+             }
+             else
+             { 
+             ViewBag.UserRole = "";
+             }
 
             return View();
         }

@@ -11,3 +11,9 @@ Tendo um Encontro, podemos inserir Tratamentos que podem ter um ou muitos medica
 A opção Ver Tratamentos ao listar os Encontros permite cadastrar um novo Tratamento associado a um Pet e Veterinario que executa a ação.  
 O sistema permite a exibição de Agenda. A Agenda pode ser editada por Veterinarios e Secretarios.  
 Ao clicar em Minha Área você volta para a página específica ao seu Role.
+A Agenda pode ser visualizada por Curiosos, Proprietarios e pessoas que não tem conta (pública). Eles não podem Editá-la.  
+Apenas Veterinarios e Secretarios editam a Agenda. A Agenda pode ser vista por Veterinario ou podemos ver TODOS os agendamentos juntos.  
+Os Proprietarios só podem visualizar os seus Pets. Eles podem visualizar os Encontros e Tratamentos. Porém não podem editar nada.  
+Secretários não podem editar Encontros ou Tratamentos. Apenas Veterinarios podem fazer isso.  
+Na página inicial uma pessoa não logada poderá acessar a lista de Veterinarios, de Secretarios e a Agenda.  
+Ao clicar em ClinVet você será direcionado para a página Home do sistema.

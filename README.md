@@ -17,3 +17,4 @@ Os Proprietarios só podem visualizar os seus Pets. Eles podem visualizar os Enc
 Secretários não podem editar Encontros ou Tratamentos. Apenas Veterinarios podem fazer isso.  
 Na página inicial uma pessoa não logada poderá acessar a lista de Veterinarios, de Secretarios e a Agenda.  
 Ao clicar em ClinVet você será direcionado para a página Home do sistema.
+Para funcionar perfeitamente precisa instalar o fullCalendar: npm.cmd install fullcalendar

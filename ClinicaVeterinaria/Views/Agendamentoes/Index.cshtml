@@ -32,14 +32,14 @@
                 },
                 selectable: true,
                 select: function (info) {
-                    if (userRole == 'Veterinario' && userRole == 'Secretario') {
+                    if (userRole === 'Veterinario' && userRole === 'Secretario') {
                         abrirModal(0, info.start, info.end);
                     } else {
                         alert('Você não tem permissão para criar agendamentos.');
                     }
                 },
                 eventClick: function (info) {
-                    if (userRole == 'Veterinario' && userRole == 'Secretario') {
+                    if (userRole === 'Veterinario' && userRole === 'Secretario') {
                         abrirModal(info.event.id, info.event.start, info.event.end, {
                             tipoConsulta: info.event.extendedProps.tipoConsulta,
                             nomeCliente: info.event.extendedProps.nomeCliente,

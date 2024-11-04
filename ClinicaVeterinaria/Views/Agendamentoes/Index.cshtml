@@ -1,0 +1,199 @@
+﻿@model IEnumerable<ClinicaVeterinaria.Models.Agendamento>
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js'></script>
+
+    <script>
+        var userRole = '@ViewBag.UserRole';
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                locale: 'pt-br',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                initialView: 'dayGridMonth',
+                events: function (fetchInfo, successCallback, failureCallback) {
+                    var veterinarioId = $('#VeterinarioFiltro').val();
+                    obterEventos(fetchInfo.start, fetchInfo.end, fetchInfo.timezone, veterinarioId)
+                        .then(events => successCallback(events))
+                        .catch(err => failureCallback(err));
+                },
+                selectable: true,
+                select: function (info) {
+                    if (userRole == 'Veterinario' && userRole == 'Secretario') {
+                        abrirModal(0, info.start, info.end);
+                    } else {
+                        alert('Você não tem permissão para criar agendamentos.');
+                    }
+                },
+                eventClick: function (info) {
+                    if (userRole == 'Veterinario' && userRole == 'Secretario') {
+                        abrirModal(info.event.id, info.event.start, info.event.end, {
+                            tipoConsulta: info.event.extendedProps.tipoConsulta,
+                            nomeCliente: info.event.extendedProps.nomeCliente,
+                            telefoneCliente: info.event.extendedProps.telefoneCliente,
+                            veterinarioId: info.event.extendedProps.veterinarioId,
+                            description: info.event.extendedProps.description,
+                            corFundo: info.event.extendedProps.backgroundColor
+                        });
+                    } else {
+                        alert('Você não tem permissão para visualizar os dados de agendamentos.');
+                    }
+                }
+            });
+            calendar.render();
+
+            $('#VeterinarioFiltro').change(function () {
+                calendar.refetchEvents();
+            });
+        });
+
+        function obterEventos(start, end, timezone, veterinarioId) {
+            return $.getJSON('/Agendamentoes/ObterAgendamentos', { veterinarioId: veterinarioId })
+                .then(events => {
+                    return events.length > 0 ? events.map(event => ({
+                        id: event.Id,
+                        title: event.Title,
+                        start: event.Start,
+                        end: event.End,
+                        backgroundColor: event.BackgroundColor,
+                        extendedProps: {
+                            tipoConsulta: event.TipoConsulta,
+                            nomeCliente: event.NomeCliente,
+                            telefoneCliente: event.TelefoneCliente,
+                            veterinarioId: event.VeterinarioId,
+                            description: event.Description
+                        }
+                    })) : [];
+                });
+        }
+
+        function abrirModal(id = 0, start = null, end = null, evento = null) {
+            $('#agendamentoId').val(id);
+            $('#TipoConsulta').val(evento ? evento.tipoConsulta : '');
+            $('#txtNomeCliente').val(evento ? evento.nomeCliente : '');
+            $('#txtTelefoneCliente').val(evento ? evento.telefoneCliente : '');
+            $('#VeterinarioId').val(evento ? evento.veterinarioId : '');
+            $('#txtInicio').val(start ? moment(start).format('YYYY-MM-DDTHH:mm') : '');
+            $('#txtFim').val(end ? moment(end).format('YYYY-MM-DDTHH:mm') : '');
+            $('#txtCorFundo').val(evento ? evento.corFundo : '');
+            $('#txtDescricao').val(evento ? evento.description : '');
+            $('#modalAgendamento').modal('show');
+        }
+
+        function salvarAgendamento() {
+            var dados = {
+                Id: $('#agendamentoId').val(),
+                Title: $('#TipoConsulta').val(),
+                Description: $('#txtDescricao').val(),
+                Start: $('#txtInicio').val(),
+                End: $('#txtFim').val(),
+                TipoConsulta: $('#TipoConsulta').val(),
+                NomeCliente: $('#txtNomeCliente').val(),
+                TelefoneCliente: $('#txtTelefoneCliente').val(),
+                VeterinarioId: $('#VeterinarioId').val(),
+                BackgroundColor: $('#txtCorFundo').val()
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '/Agendamentoes/SalvarAgendamento',
+                data: JSON.stringify(dados),
+                contentType: 'application/json',
+                success: function (response) {
+                    if (response.success) {
+                        $('#successMessage').text('Agendamento salvo com sucesso!').show();
+                        setTimeout(function () {
+                            $('#successMessage').hide();
+                            $('#modalAgendamento').modal('hide');
+                            $('#calendar').fullCalendar('refetchEvents');
+                        }, 2000);
+                    } else {
+                        alert(response.message || 'Erro ao salvar o agendamento.');
+                    }
+                },
+                error: function (xhr) {
+                    alert('Erro ao salvar o agendamento: ' + xhr.responseText);
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header">Filtros</div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Veterinário</label>
+                        @Html.DropDownList("VeterinarioFiltro", (SelectList)ViewBag.Veterinarios, "Todos", new { @class = "form-control", onchange = "atualizarCalendario()" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div id="calendar"></div>
+        </div>
+    </div>
+
+    <div id="modalAgendamento" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Novo Agendamento</h5>
+                    <button type="button" class="close" onclick="$('#modalAgendamento').modal('hide')">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="agendamentoId" value="0" />
+                    <div class="form-group">
+                        <label>Tipo de Consulta</label>
+                        @Html.DropDownList("TipoConsulta", (SelectList)ViewBag.TiposConsulta, new { @class = "form-control", required = "required" })
+                    </div>
+                    <div class="form-group">
+                        <label>Nome do Cliente</label>
+                        <input type="text" id="txtNomeCliente" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Telefone</label>
+                        <input type="tel" id="txtTelefoneCliente" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Veterinário</label>
+                        @Html.DropDownList("VeterinarioId", (SelectList)ViewBag.Veterinarios, new { @class = "form-control", required = "required" })
+                    </div>
+                    <div class="form-group">
+                        <label>Início</label>
+                        <input type="datetime-local" id="txtInicio" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Fim</label>
+                        <input type="datetime-local" id="txtFim" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Descrição/Observações</label>
+                        <textarea id="txtDescricao" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div id="successMessage" class="alert alert-success" style="display: none;"></div>
+                    <button type="button" class="btn btn-secondary" onclick="$('#modalAgendamento').modal('hide')">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="salvarAgendamento()">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

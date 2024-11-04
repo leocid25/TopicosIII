@@ -1,0 +1,98 @@
+﻿@model ClinicaVeterinaria.Models.Encontro
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Encontro</h4>
+    <hr />
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.Id)
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Nome)
+        @Html.ValidationMessageFor(model => model.Nome)
+    </div>
+</div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.HoraInicio, "Hora de Início", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="datetime-local" name="HoraInicio" class="form-control" value="@ViewBag.HoraInicioFormatted" />
+            @Html.ValidationMessageFor(model => model.HoraInicio, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.HoraTermino, "Hora de Término", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="datetime-local" name="HoraTermino" class="form-control" value="@ViewBag.HoraTerminoFormatted" />
+            @Html.ValidationMessageFor(model => model.HoraTermino, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TipoConsulta, "Tipo de Consulta", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.TipoConsulta, (SelectList)ViewBag.TipoConsulta, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.TipoConsulta, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ValorPagoConsulta, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ValorPagoConsulta)
+            @Html.ValidationMessageFor(model => model.ValorPagoConsulta)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PetId, "PetId", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("PetId", String.Empty)
+            @Html.ValidationMessageFor(model => model.PetId)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.VeterinarioId, "VeterinarioId", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("VeterinarioId", String.Empty)
+            @Html.ValidationMessageFor(model => model.VeterinarioId)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Descricao, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Descricao, new { @class = "form-control", rows = 5 })
+            @Html.ValidationMessageFor(model => model.Descricao)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

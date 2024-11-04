@@ -1,0 +1,44 @@
+﻿@using Microsoft.AspNet.Identity.EntityFramework
+@using ClinicaVeterinaria.Models
+@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.EntityFramework
+
+@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
+
+@{
+    ViewBag.Title = "Gerenciar Perfis";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <h3>Criar Novo Perfil</h3>
+        @using (Html.BeginForm("CreateRole", "Veterinario", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <input type="text" name="roleName" class="form-control" placeholder="Nome do perfil" required />
+            </div>
+            <button type="submit" class="btn btn-primary">Criar Perfil</button>
+        }
+    </div>
+
+    <div class="col-md-6">
+        <h3>Perfis Existentes</h3>
+        <table class="table">
+            <tr>
+                <th>Nome do Perfil</th>
+            </tr>
+            @foreach (var role in Model)
+            {
+                <tr>
+                    <td>@role.Name</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+
+

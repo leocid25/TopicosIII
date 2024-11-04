@@ -1,0 +1,13 @@
+﻿@model IEnumerable<ClinicaVeterinaria.Models.Curioso>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Área do Curioso</h2>
+
+<ul>
+    <li>@Html.ActionLink("Agendamentos", "Index", new { area = "", controller = "Agendamentoes" })</li>
+    <li>@Html.ActionLink("Lista de Veterinários", "List", new { area = "Veterinarios", controller = "Veterinarios" })</li>
+    <li>@Html.ActionLink("Lista de Secretários", "List", new { area = "Secretarios", controller = "Secretarios" })</li>
+</ul>

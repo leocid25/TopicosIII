@@ -1,0 +1,74 @@
+﻿@model ClinicaVeterinaria.Models.Agendamento
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Agendamento</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Veterinario.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Veterinario.UserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataHoraInicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataHoraInicio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Duracao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Duracao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoConsulta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoConsulta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NomeCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomeCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TelefoneCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TelefoneCliente)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,24 @@
+{
+  "version": 2,
+  "dgSpecHash": "+e80kgN/Tk4=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\leoci\\source\\repos\\ClinicaVeterinaria\\ClinicaVeterinaria\\ClinicaVeterinaria.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\leoci\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
+    "C:\\Users\\leoci\\.nuget\\packages\\microsoft.aspnet.mvc\\5.2.9\\microsoft.aspnet.mvc.5.2.9.nupkg.sha512",
+    "C:\\Users\\leoci\\.nuget\\packages\\microsoft.aspnet.mvc.pt-br\\5.2.9\\microsoft.aspnet.mvc.pt-br.5.2.9.nupkg.sha512",
+    "C:\\Users\\leoci\\.nuget\\packages\\microsoft.aspnet.razor\\3.2.9\\microsoft.aspnet.razor.3.2.9.nupkg.sha512",
+    "C:\\Users\\leoci\\.nuget\\packages\\microsoft.aspnet.razor.pt-br\\3.2.9\\microsoft.aspnet.razor.pt-br.3.2.9.nupkg.sha512",
+    "C:\\Users\\leoci\\.nuget\\packages\\microsoft.aspnet.webpages\\3.2.9\\microsoft.aspnet.webpages.3.2.9.nupkg.sha512",
+    "C:\\Users\\leoci\\.nuget\\packages\\microsoft.aspnet.webpages.pt-br\\3.2.9\\microsoft.aspnet.webpages.pt-br.3.2.9.nupkg.sha512",
+    "C:\\Users\\leoci\\.nuget\\packages\\microsoft.web.infrastructure\\2.0.0\\microsoft.web.infrastructure.2.0.0.nupkg.sha512",
+    "C:\\Users\\leoci\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.5.2\\system.runtime.compilerservices.unsafe.4.5.2.nupkg.sha512",
+    "C:\\Users\\leoci\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.2\\system.threading.tasks.extensions.4.5.2.nupkg.sha512",
+    "C:\\Users\\leoci\\.nuget\\packages\\unity\\5.11.10\\unity.5.11.10.nupkg.sha512",
+    "C:\\Users\\leoci\\.nuget\\packages\\unity.abstractions\\5.11.1\\unity.abstractions.5.11.1.nupkg.sha512",
+    "C:\\Users\\leoci\\.nuget\\packages\\unity.container\\5.11.1\\unity.container.5.11.1.nupkg.sha512",
+    "C:\\Users\\leoci\\.nuget\\packages\\unity.mvc\\5.11.1\\unity.mvc.5.11.1.nupkg.sha512",
+    "C:\\Users\\leoci\\.nuget\\packages\\webactivatorex\\2.2.0\\webactivatorex.2.2.0.nupkg.sha512"
+  ],
+  "logs": []
+}

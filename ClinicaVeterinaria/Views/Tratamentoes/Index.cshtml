@@ -1,0 +1,77 @@
+﻿@model IEnumerable<ClinicaVeterinaria.Models.Tratamento>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", new { encontroId = ViewBag.EncontroId })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Encontro.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pet.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoraInicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoraTermino)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValorPagoTratamento)
+        </th>
+        <th>
+            Medicações
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Encontro.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pet.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descricao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoraInicio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoraTermino)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValorPagoTratamento)
+        </td>
+        <td>
+            @foreach (var medicacao in item.Medicacoes)
+            {
+                <div>@medicacao.Nome</div>
+            }
+        </td>
+        <td>
+            @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |*@
+            @Html.ActionLink("Details", "Details", new { id = item.Id, encontroId = ViewBag.EncontroId })
+        </td>
+    </tr>
+}
+
+</table>

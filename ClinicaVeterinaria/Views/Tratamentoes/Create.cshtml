@@ -1,0 +1,174 @@
+﻿@model ClinicaVeterinaria.Models.Tratamento
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Tratamento</h4>
+    <hr />
+    @Html.ValidationSummary(true)
+    <div class="form-group">
+        @Html.LabelFor(model => model.Descricao, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Descricao)
+            @Html.ValidationMessageFor(model => model.Descricao)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.HoraInicio, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="input-group">
+                @Html.EditorFor(model => model.HoraInicio, new { htmlAttributes = new { @class = "form-control datepicker", type = "datetime-local" } })
+                @Html.ValidationMessageFor(model => model.HoraInicio, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.HoraTermino, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="input-group">
+                @Html.EditorFor(model => model.HoraTermino, new { htmlAttributes = new { @class = "form-control datepicker", type = "datetime-local" } })
+                @Html.ValidationMessageFor(model => model.HoraTermino, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.Status, new SelectList(Enum.GetValues(typeof(ClinicaVeterinaria.Models.Status))), htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ValorPagoTratamento, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ValorPagoTratamento)
+            @Html.ValidationMessageFor(model => model.ValorPagoTratamento)
+        </div>
+    </div>
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.PetId, "Pet", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("PetId", ViewBag.PetId as SelectList, "Selecione um Pet", new { @class = "form-control", @id = "petDropdown" })
+                @Html.ValidationMessageFor(model => model.PetId, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+    @Html.LabelFor(model => model.PetId, "Pet")
+    <input type="hidden" name="PetId" value="@ViewBag.Pet.Id" /> <input type="text" id="petNome" name="petNome" value="@ViewBag.Pet.Nome" readonly />
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.EncontroId, "Encontro", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("EncontroId", null, "Selecione um Encontro", new { @class = "form-control", @id = "encontroDropdown" })
+                @Html.ValidationMessageFor(model => model.EncontroId, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+    @Html.LabelFor(model => model.EncontroId, "Encontro")
+    <input type="hidden" name="EncontroId" value="@ViewBag.Encontro.Id" /> <input type="text" id="encontroNome" name="encontroNome" value="@ViewBag.Encontro.Nome" readonly />
+
+
+    <div id="receitas">
+        <div class="receita">
+            <input type="text" name="receitas[0].Nome" placeholder="Medicamento" class="form-control">
+            <input type="text" name="receitas[0].Dosagem" placeholder="Dosagem" class="form-control">
+            <textarea name="receitas[0].Descricao" placeholder="Descrição" class="form-control"></textarea>
+        </div>
+    </div>
+    <button id="adicionarReceita" type="button">Adicionar Receita</button>
+
+
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+<script>
+    $(document).ready(function () {
+        // Formata a data atual para o formato aceito pelo input datetime-local
+        var now = new Date();
+        var day = ("0" + now.getDate()).slice(-2);
+        var month = ("0" + (now.getMonth() + 1)).slice(-2);
+        var hours = ("0" + now.getHours()).slice(-2);
+        var minutes = ("0" + now.getMinutes()).slice(-2);
+
+        var today = now.getFullYear() + "-" + month + "-" + day + "T" + hours + ":" + minutes;
+
+
+        // Função para adicionar Medicamentos ao Tratamento
+        $('#adicionarReceita').click(function () {
+            var indice = $('#receitas .receita').length; // Conta quantas receitas já existem
+            var novaReceita = $('#receitas .receita:first').clone();
+
+            // Limpa os campos da nova receita
+            novaReceita.find('input, textarea').val('');
+
+            // Atualiza os índices dos campos
+            novaReceita.find('[name^="receitas"]').each(function () {
+                var name = $(this).attr('name').replace(/\[\d+\]/, '[' + indice + ']');
+                $(this).attr('name', name);
+            });
+
+            $('#receitas').append(novaReceita);
+        });
+       
+
+
+
+
+
+        // Se for uma nova consulta, define o valor padrão como agora
+        if (!$('input[type="datetime-local"]').val()) {
+            $('input[type="datetime-local"]').val(today);
+        }
+
+        $('#petDropdown').change(function () {
+                var petId = $(this).val();
+                if (petId) {
+                    $.ajax({
+                        url: '@Url.Action("GetEncontrosPorPet", "Tratamentoes")',
+                        type: 'GET',
+                        data: { petId: petId },
+                        success: function (data) {
+                            var encontroDropdown = $('#encontroDropdown');
+                            encontroDropdown.empty();
+                            encontroDropdown.append($('<option></option>').val('').html('Selecione um Encontro')); // Opção padrão
+                            $.each(data, function (index, encontro) {
+                                encontroDropdown.append($('<option></option>').val(encontro.Id).html(encontro.Nome));
+                            });
+                        }
+                    });
+                } else {
+                    $('#encontroDropdown').empty(); // Limpa os encontros se nenhum pet for selecionado
+                }
+        });
+    });
+</script>
+}

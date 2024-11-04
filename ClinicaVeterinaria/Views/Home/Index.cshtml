@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+    <header>
+        
+        <img src="~/Content/img/clinvet-logo.svg" alt="Logo da ClinVet" />
+    </header>
+
+    <main>
+        <div class="row">
+            <section class="col-md-4" aria-labelledby="atendimento">
+                <h2 id="atendimento">Tipos de Atendimento</h2>
+                <ul>
+                    <li>Consulta veterinária</li>
+                    <li>Vacinação</li>
+                    <li>Cirurgia</li>
+                    <li>Atendimento de Emergência</li>
+                </ul>
+            </section>
+
+            <section class="col-md-4" aria-labelledby="servicos">
+                <h3 id="servicos">Serviços</h3>
+                <ul>
+                    <li>@Html.ActionLink("Agendamentos", "Index", new { area = "", controller = "Agendamentoes" })</li>
+                    <li>@Html.ActionLink("Lista de Veterinários", "List", new { area = "Veterinarios", controller = "Veterinarios" })</li>
+                    <li>@Html.ActionLink("Lista de Secretários", "List", new { area = "Secretarios", controller = "Secretarios" })</li>
+                </ul>
+                
+            </section>
+
+
+            <section class="col-md-4" aria-labelledby="contato">
+                <h2 id="contato">Entre em contato</h2>
+                <p>
+                    <strong>Endereço:</strong> Rua das Flores, 123 - Centro<br>
+                    <strong>Telefone:</strong> (11) 1234-5678<br>
+                    <strong>Email:</strong> contato@clinvet.com.br<br>
+                </p>
+                <div class="redes-sociais">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </section>
+        </div>
+</main>

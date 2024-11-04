@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Área do Secretário</h2>
+<ul>
+    <li>@Html.ActionLink("Agendamentos", "Index", new { area = "", controller = "Agendamentoes" })</li>
+    <li>@Html.ActionLink("Gerenciar Proprietários", "List", new { area = "Proprietarios", controller = "Proprietarios" })</li>
+    <li>@Html.ActionLink("Listar Veterinarios", "List", new { area = "Veterinarios", controller = "Veterinarios" })</li>
+    <li>@Html.ActionLink("Listar Secretarios", "List", new { area = "Secretarios", controller = "Secretarios" })</li>
+    <li>@Html.ActionLink("Pets", "Index", new { area = "", controller = "Pets" })</li>
+</ul>
+

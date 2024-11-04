@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100">
+    <!-- Pata de animal estilizada -->
+    <path d="M50 40 C45 35, 40 25, 45 20 C50 15, 55 20, 55 25 C55 30, 52 35, 50 40" fill="#4A90E2"/>
+    <path d="M65 40 C60 35, 55 25, 60 20 C65 15, 70 20, 70 25 C70 30, 67 35, 65 40" fill="#4A90E2"/>
+    <path d="M57 50 C52 45, 47 35, 52 30 C57 25, 62 30, 62 35 C62 40, 59 45, 57 50" fill="#4A90E2"/>
+    <path d="M72 50 C67 45, 62 35, 67 30 C72 25, 77 30, 77 35 C77 40, 74 45, 72 50" fill="#4A90E2"/>
+    <path d="M63 65 C55 55, 45 40, 55 30 C65 20, 75 30, 75 40 C75 50, 68 55, 63 65" fill="#4A90E2"/>
+    
+    <!-- Cruz médica -->
+    <rect x="85" y="30" width="20" height="40" fill="#E74C3C" rx="2"/>
+    <rect x="75" y="40" width="40" height="20" fill="#E74C3C" rx="2"/>
+    
+    <!-- Texto ClinVet -->
+    <text x="130" y="60" font-family="Arial" font-size="32" font-weight="bold" fill="#2C3E50">
+        Clin<tspan fill="#4A90E2">Vet</tspan>
+    </text>
+    
+    <!-- Slogan -->
+    <text x="130" y="75" font-family="Arial" font-size="12" fill="#7F8C8D">
+        Cuidado e carinho para seu pet
+    </text>
+</svg>

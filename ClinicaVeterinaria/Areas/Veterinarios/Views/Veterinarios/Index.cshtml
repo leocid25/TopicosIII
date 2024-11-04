@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Área do Veterinário</h2>
+<ul>
+    <li>@Html.ActionLink("Criar Usuarios", "Register", new { area = "", controller = "Admin" })</li>
+    <li>@Html.ActionLink("Agendamentos", "Index", new { area = "", controller = "Agendamentoes" })</li>
+    <li>@Html.ActionLink("Gerenciar Veterinários", "List")</li>
+    <li>@Html.ActionLink("Gerenciar Secretários", "List", new { area = "Secretarios", controller = "Secretarios" })</li>
+    <li>@Html.ActionLink("Gerenciar Proprietários", "List", new { area = "Proprietarios", controller = "Proprietarios" })</li>
+    <li>@Html.ActionLink("Pets", "Index", new { area = "", controller = "Pets" })</li>
+    <li>@Html.ActionLink("Encontroes", "Index", new { area = "", controller = "Encontroes" })</li>
+    <li>@Html.ActionLink("Tratamentoes", "Index", new { area = "", controller = "Tratamentoes" })</li>
+    <li>@Html.ActionLink("Receitas", "Index", new { area = "", controller = "Receitas" })</li>
+</ul>
+
